@@ -21,5 +21,8 @@ def recursiveXYCut(image, n, ignoreBottomTop = True, axis = 1):
     # Skip top and bottom segmentation or not (depends on the param)
     #for peak in peaks[1:-1 if ignoreBottomTop else ]:
     for peak in peaks[1:-1] if ignoreBottomTop else peaks:
-        temp[range(peak-2, peak+2)] = 0
+        if axis == 1:
+            temp[range(peak-2, peak+2)] = 0
+        else:
+            temp[:, range(peak-2, peak+2)] = 0
     return Image.fromarray(np.uint8(image_arr * temp))
